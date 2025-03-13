@@ -10,7 +10,7 @@ export default function Banner () {
     const router = useRouter()
     return (
         <div className={styles.banner} onClick={() => { setIndex(index+1) }}>
-            <Image src={covers[index%3]} 
+            <Image src={covers[index%4]} 
             alt='cover'
             fill={true}
             priority
