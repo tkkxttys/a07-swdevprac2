@@ -2,6 +2,7 @@
 import { useReducer } from "react"
 import ProductCard from "./Card"
 import Link from "next/link"
+import InteractiveCard from "./InteractiveCard"
 
 export default function CardPanel() {
 
@@ -44,13 +45,21 @@ export default function CardPanel() {
             <div style={{margin: "20px", display:"flex", flexDirection:"row", flexWrap:"wrap", justifyContent:"space-around", alignContent:"space-around"}}>
 
                 {
-                    mockVenueRepo.map((venueItem) => (
+                    /*mockVenueRepo.map((venueItem) => (
                         <Link href={`/venue/${venueItem.vid}`} className="w-1/5">
                             <ProductCard venueName={venueItem.name} imgSrc={venueItem.image}
                                 onRating={handleRatingChange}
                             />
                         </Link>
-                    ))
+                    ))*/
+
+                        mockVenueRepo.map((venueItem) => (
+                            <Link href={`/venue/${venueItem.vid}`} key={venueItem.vid} passHref className="w-1/5">
+                                <InteractiveCard contentName={venueItem.name} asChild>
+                                    <ProductCard venueName={venueItem.name} imgSrc={venueItem.image} onRating={handleRatingChange} />
+                                </InteractiveCard>
+                            </Link>
+                        ))
                 }
 
             </div>

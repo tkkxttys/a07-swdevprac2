@@ -24,10 +24,14 @@ export default function ProductCard ( {venueName, imgSrc, onRating} :  {venueNam
                 className='h-[10%] px-2 py-1' 
                 value={value}
                 onChange={(e, newValue) => {
-                    e.stopPropagation();
                     setValue(newValue);
                     onRating(venueName,newValue);
                 }}
+                onClick={(e) => e.stopPropagation()} 
+                onPointerDown={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                }}                
             />
 
         </InteractiveCard>
