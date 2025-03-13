@@ -1,6 +1,7 @@
 'use client'
 import { useReducer } from "react"
 import ProductCard from "./Card"
+import Link from "next/link"
 
 export default function CardPanel() {
 
@@ -32,24 +33,25 @@ export default function CardPanel() {
         dispatchRating({ type: 'increase key-value', venueName, rating });
     };
 
+    const mockVenueRepo = [
+        {vid: "001", name: "The Bloom Pavilion", image: "/img/bloom.jpg"},
+        {vid: "002", name: "Spark Space", image: "/img/sparkspace.jpg"},
+        {vid: "003", name: "The Grand Table", image: "/img/grandtable.jpg"}
+    ]
+
     return(
         <div>
             <div style={{margin: "20px", display:"flex", flexDirection:"row", flexWrap:"wrap", justifyContent:"space-around", alignContent:"space-around"}}>
-            <ProductCard 
-                venueName="The Bloom Pavilion" 
-                imgSrc='/img/bloom.jpg'
-                onRating={handleRatingChange}
-            />
-            <ProductCard 
-                venueName="Spark Space" 
-                imgSrc='/img/sparkspace.jpg'
-                onRating={handleRatingChange}
-            />
-            <ProductCard 
-                venueName="The Grand Table" 
-                imgSrc='/img/grandtable.jpg'
-                onRating={handleRatingChange}
-            />
+
+                {
+                    mockVenueRepo.map((venueItem) => (
+                        <Link href={`/venue/${venueItem.vid}`} className="w-1/5">
+                            <ProductCard venueName={venueItem.name} imgSrc={venueItem.image}
+                                onRating={handleRatingChange}
+                            />
+                        </Link>
+                    ))
+                }
 
             </div>
             <div className="w-full text-xl font-medium">Compare List: { venueList.size }</div>
